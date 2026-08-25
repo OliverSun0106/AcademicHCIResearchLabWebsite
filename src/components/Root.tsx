@@ -52,10 +52,10 @@ function Nav() {
               className="text-sm font-medium leading-none"
               style={{ color: "#012169", fontFamily: "var(--font-display)", fontWeight: 500 }}
             >
-              HCIL @ Emory
+              HCI @ Emory
             </div>
             <div className="text-xs mt-0.5" style={{ color: "#8f8f8f", fontFamily: "var(--font-sans)", fontWeight: 400 }}>
-              Human-Computer Interaction Lab
+              ImmersED HCI Group
             </div>
           </div>
         </Link>
@@ -120,12 +120,14 @@ function Footer() {
               className="text-base font-medium mb-2"
               style={{ fontFamily: "var(--font-display)", color: "#012169" }}
             >
-              HCIL @ Emory
+              HCI @ Emory
             </div>
             <p className="text-sm leading-relaxed" style={{ color: "#5a5a5a" }}>
               Department of Computer Science<br />
+              Mathematics &amp; Science Center, Suite W401<br />
+              400 Dowman Drive<br />
               Emory University<br />
-              Atlanta, Georgia
+              Atlanta, GA 30322
             </p>
           </div>
           <div>
@@ -133,9 +135,9 @@ function Footer() {
               Contact
             </div>
             <p className="text-sm" style={{ color: "#5a5a5a" }}>
-              s.chen@emory.edu<br />
-              Mathematics and Science Center<br />
-              Room W430
+              cs@emory.edu<br />
+              404-727-7962<br />
+              404-727-5611
             </p>
           </div>
           <div>
@@ -158,7 +160,7 @@ function Footer() {
         </div>
         <div className="mt-10 pt-6 border-t flex items-center justify-between" style={{ borderColor: "#e2e2de" }}>
           <p className="text-xs" style={{ color: "#8f8f8f" }}>
-            © 2024 Human-Computer Interaction Lab, Emory University
+            © 2026 ImmersED HCI Group, Emory University
           </p>
           <div className="w-4 h-4" style={{ background: "#F2A900", borderRadius: "50%" }} />
         </div>

@@ -24,9 +24,16 @@ export default function Publications() {
           Publications
         </h1>
         <p className="text-lg max-w-2xl" style={{ color: "#5a5a5a", lineHeight: 1.7 }}>
-          Selected publications from the Human-Computer Interaction Lab at Emory University.
+          Selected publications from the ImmersED HCI Group at Emory University.
           For a complete list, see our{" "}
-          <a href="#" style={{ color: "#012169" }}>Google Scholar profile</a>.
+          <a
+            href=""
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "#012169" }}
+          >
+            Publication
+          </a>.
         </p>
       </div>
 
@@ -36,9 +43,9 @@ export default function Publications() {
         style={{ background: "#e2e2de" }}
       >
         {[
-          { value: "24+", label: "Publications" },
-          { value: "3×", label: "Best Paper Awards" },
-          { value: "CHI · CSCW · ASSETS", label: "Top Venues" },
+          { value: "x+", label: "Publications" },
+          { value: "×", label: "Best Paper Awards" },
+          { value: "CHI · CSCW · ISMAR", label: "Top Venues" },
         ].map((stat) => (
           <div
             key={stat.label}

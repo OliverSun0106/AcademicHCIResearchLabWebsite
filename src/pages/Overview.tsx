@@ -34,9 +34,8 @@ export default function Overview() {
                 letterSpacing: "-0.02em",
               }}
             >
-              
-              IMMERSEd<br />
-              <span style={{ color: "#012169" }}>HCI Lab</span>
+              <span style={{ color: "#012169" }}>ImmersED</span><br />
+              <span style={{ color: "#0d0d0d" }}>HCI Group</span>
             </h1>
             <p
               className="text-xl md:text-2xl mb-6 leading-relaxed"
@@ -47,17 +46,26 @@ export default function Overview() {
                 fontStyle: "italic",
               }}
             >
-              Designing Technology for Human Flourishing
+              Designing human-centered technologies for learning physical and hands-on skills.
             </p>
             <p
               className="text-base md:text-lg leading-relaxed mb-12 max-w-2xl"
               style={{ color: "#5a5a5a", fontFamily: "var(--font-sans)", fontWeight: 300 }}
             >
-              We study how people interact with computing systems and design new
-              technologies that improve human capabilities, wellbeing, and social
-              connection. Our work spans accessibility, health informatics, AI
-              interfaces, and social computing—always grounded in rigorous
-              empirical methods and human-centered values.
+              The ImmersED HCI Group at Emory University conducts research at the
+              intersection of Human-Computer Interaction and Learning Sciences. We
+              design, build, and study interactive systems that support how people
+              learn complex physical and hands-on skills.
+              <br />
+              <br />
+              Our research explores immersive technologies, physiological and
+              behavioral sensing, tangible interfaces, and generative AI to create
+              learner-centered experiences that can adapt to learners, support
+              reflection, and enable more effective and engaging skill learning.
+              <br />
+              <br />
+              Our work spans domains including motor skills, maker and fabrication
+              skills, manufacturing, and medical training.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <Link
@@ -149,8 +157,9 @@ export default function Overview() {
                 >
                   {area.icon}
                 </div>
+
                 <h3
-                  className="text-lg mb-3"
+                  className="text-lg mb-4"
                   style={{
                     fontFamily: "var(--font-display)",
                     fontWeight: 400,
@@ -159,7 +168,29 @@ export default function Overview() {
                 >
                   {area.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#5a5a5a" }}>
+
+                {/* Keywords */}
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {area.keywords.map((keyword) => (
+                    <span
+                      key={keyword}
+                      className="text-xs px-2.5 py-1 rounded-full"
+                      style={{
+                        color: "#012169",
+                        background: "#eef2f8",
+                        border: "1px solid #d8e0ec",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: "#5a5a5a" }}
+                >
                   {area.description}
                 </p>
               </div>
@@ -312,51 +343,7 @@ export default function Overview() {
         </div>
       </section>
 
-      {/* News / recent highlight */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-px w-8" style={{ background: "#F2A900" }} />
-                <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#8f8f8f" }}>
-                  Recent Recognition
-                </span>
-              </div>
-              <h2
-                className="text-3xl md:text-4xl mb-6"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 300,
-                  color: "#0d0d0d",
-                  letterSpacing: "-0.01em",
-                  lineHeight: 1.2,
-                }}
-              >
-                AccessKey receives Best Paper Award at ASSETS 2023
-              </h2>
-              <p className="text-base leading-relaxed mb-8" style={{ color: "#5a5a5a" }}>
-                Our adaptive keyboard research, led by PhD student Marcus Williams, received the Best Paper Award at the ACM ASSETS 2023 conference. The system reduces input error rates by 41% for users with motor impairments.
-              </p>
-              <Link
-                to="/projects"
-                className="text-sm font-medium"
-                style={{ color: "#012169", textDecoration: "none" }}
-              >
-                Read about the project →
-              </Link>
-            </div>
-            <div>
-              <img
-                src={IMG("1587614382346-4ec70e388b28", 600, 420)}
-                alt="Researcher working with adaptive keyboard interface"
-                className="w-full object-cover"
-                style={{ background: "#e8edf5" }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+
     </div>
   );
 }
