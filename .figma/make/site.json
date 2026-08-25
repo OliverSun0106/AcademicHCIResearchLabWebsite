@@ -1,0 +1,10 @@
+{
+  "description": "Showcases an HCI research lab's work with organized sections for projects, people, and publications, offering a clean, professional academic resource.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
