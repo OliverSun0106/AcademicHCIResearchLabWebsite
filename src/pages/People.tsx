@@ -1,7 +1,11 @@
 import { people } from "../data/content";
 
 const IMG = (id: string, w: number, h: number) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format`;
+  id.startsWith("http")
+    ? id
+    : id.startsWith("local:")
+      ? `${import.meta.env.BASE_URL}${id.slice(6)}`
+      : `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format`;
 
 export default function People() {
   return (
@@ -36,15 +40,14 @@ export default function People() {
       <section className="mb-20">
         <SectionLabel>Principal Investigator</SectionLabel>
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-0 border overflow-hidden"
+          className="grid grid-cols-1 md:grid-cols-[minmax(280px,0.9fr)_minmax(0,1.3fr)] gap-0 border overflow-hidden"
           style={{ borderColor: "#e2e2de" }}
         >
-          <div className="overflow-hidden" style={{ background: "#e8edf5" }}>
+          <div className="h-[360px] md:h-auto md:min-h-[460px] overflow-hidden" style={{ background: "#e8edf5" }}>
             <img
               src={IMG(people.pi.photo, 700, 500)}
               alt={people.pi.name}
               className="w-full h-full object-cover"
-              style={{ minHeight: "300px", maxHeight: "400px" }}
             />
           </div>
           <div className="p-10 flex flex-col justify-center">
@@ -75,13 +78,24 @@ export default function People() {
                 </div>
               ))}
             </div>
-            <a
-              href={`mailto:${people.pi.email}`}
-              className="text-sm font-medium transition-opacity hover:opacity-60"
-              style={{ color: "#012169", textDecoration: "none" }}
-            >
-              {people.pi.email}
-            </a>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <a
+                href={`mailto:${people.pi.email}`}
+                className="text-sm font-medium transition-opacity hover:opacity-60"
+                style={{ color: "#012169", textDecoration: "none" }}
+              >
+                {people.pi.email}
+              </a>
+              <a
+                href={people.pi.website}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm font-medium transition-opacity hover:opacity-60"
+                style={{ color: "#012169", textDecoration: "none" }}
+              >
+                Personal Website ↗
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -89,8 +103,9 @@ export default function People() {
       {/* PhD Students */}
       <section className="mb-20">
         <SectionLabel>PhD Students</SectionLabel>
+        <StudentProfileCard person={people.phd[0]} />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {people.phd.map((person) => (
+          {people.phd.slice(1).map((person) => (
             <MemberCard key={person.name} person={person} showYear />
           ))}
         </div>
@@ -189,12 +204,11 @@ function MemberCard({
         (e.currentTarget as HTMLDivElement).style.borderColor = "#e2e2de";
       }}
     >
-      <div className="overflow-hidden" style={{ background: "#e8edf5" }}>
+      <div className="aspect-square overflow-hidden" style={{ background: "#e8edf5" }}>
         <img
-          src={`https://images.unsplash.com/photo-${person.photo}?w=400&h=400&fit=crop&auto=format`}
+          src={IMG(person.photo, 400, 400)}
           alt={person.name}
-          className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          style={{ height: "200px" }}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
       <div className="p-5">
@@ -211,6 +225,74 @@ function MemberCard({
         )}
         <div className="text-xs leading-relaxed" style={{ color: "#8f8f8f" }}>
           {person.interests}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StudentProfileCard({ person }: { person: typeof people.phd[0] }) {
+  const links = [
+    { label: "Email ↗", href: person.email ? `mailto:${person.email}` : "" },
+    { label: "Personal Website ↗", href: person.website },
+    { label: "CV ↗", href: person.cv },
+  ];
+
+  return (
+    <div
+      className="grid grid-cols-1 md:grid-cols-[minmax(280px,0.9fr)_minmax(0,1.3fr)] border mb-8 overflow-hidden"
+      style={{ borderColor: "#e2e2de", background: "#ffffff" }}
+    >
+      <div className="h-[360px] md:h-auto md:min-h-[460px] overflow-hidden" style={{ background: "#e8edf5" }}>
+        <img
+          src={IMG(person.photo, 900, 600)}
+          alt={person.name}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="p-8 md:p-10 flex flex-col justify-center">
+        <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#012169" }}>
+          {person.position}
+        </div>
+        <h3
+          className="text-3xl mb-2"
+          style={{ fontFamily: "var(--font-display)", fontWeight: 400, color: "#0d0d0d" }}
+        >
+          {person.name}
+        </h3>
+        <p className="text-sm mb-6" style={{ color: "#8f8f8f" }}>
+          {person.interests}
+        </p>
+        <p className="text-base leading-relaxed mb-7" style={{ color: "#5a5a5a" }}>
+          {person.bio}
+        </p>
+        <div className="space-y-2 mb-7">
+          {person.focusAreas.map((area) => (
+            <div key={area} className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 flex-shrink-0 rounded-full" style={{ background: "#F2A900" }} />
+              <span className="text-sm" style={{ color: "#5a5a5a" }}>{area}</span>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
+          {links.map((link) =>
+            link.href ? (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.label === "Email ↗" ? undefined : "_blank"}
+                rel={link.label === "Email ↗" ? undefined : "noreferrer"}
+                className="text-sm font-medium transition-opacity hover:opacity-60"
+                style={{ color: "#012169", textDecoration: "none" }}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <span key={link.label} className="text-sm font-medium" style={{ color: "#8f8f8f" }}>
+                {link.label}
+              </span>
+            ),
+          )}
         </div>
       </div>
     </div>

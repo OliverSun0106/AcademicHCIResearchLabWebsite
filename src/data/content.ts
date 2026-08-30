@@ -110,16 +110,34 @@ export const projects = [
 
 export const people = {
   pi: {
-    name: "PI Name",
+    name: "Dishita Turakhia, Ph.D.",
     position: "Principal Investigator",
-    title: "Placeholder Title",
-    interests: "Placeholder interest area",
-    bio: "Placeholder biography for this lab member.",
-    photo: "photo-1573496359142-b8d87734a5a2",
-    awards: ["Placeholder Award 1", "Placeholder Award 2"],
-    email: "pi@placeholder.edu",
+    title: "Assistant Professor of Computer Science",
+    interests: "Human-Computer Interaction · Learning Sciences · XR · Generative AI",
+    bio: "Dishita Turakhia leads the ImmersED HCI Group at Emory University. Her research designs human-centered systems for learning physical and hands-on skills—including motor, maker, manufacturing, and medical skills—using physiological sensing, extended reality, and generative AI.",
+    photo: "local:dishita-turakhia.jpg",
+    awards: ["EECS Rising Stars", "Meta Ph.D. Research Fellowship"],
+    email: "dishita.turakhia@emory.edu",
+    website: "https://dishitaturakhia.com/",
   },
   phd: [
+    {
+      name: "Zezheng (Oliver) Sun",
+      position: "Ph.D. Student in Computer Science",
+      year: "Ph.D. Student",
+      interests:
+        "Human-Computer Interaction · Extended Reality · Artificial Intelligence · Healthcare",
+      bio: "Zezheng (Oliver) Sun is a Ph.D. student in Computer Science at Emory University, advised by Dr. Dishita Turakhia. His research focuses on designing human-centered interactive systems that leverage extended reality (XR) and artificial intelligence to support learning, communication, and collaboration. His work explores how emerging technologies can create more intuitive, engaging, and effective interactive experiences across healthcare, education, and immersive environments.",
+      focusAreas: [
+        "Extended Reality & Spatial Computing",
+        "Human-AI Interaction",
+        "Technology for Learning & Healthcare",
+      ],
+      photo: "local:oliver-sun.png",
+      email: "",
+      website: "",
+      cv: "",
+    },
     {
       name: "PhD Student 1",
       position: "PhD Student",
