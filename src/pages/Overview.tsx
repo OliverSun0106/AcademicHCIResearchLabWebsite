@@ -199,6 +199,90 @@ export default function Overview() {
         </div>
       </section>
 
+      {/* Research Themes */}
+      <section className="py-20 md:py-28" style={{ background: "#ffffff" }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="mb-14">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-px w-8" style={{ background: "#F2A900" }} />
+              <span
+                className="text-xs font-semibold uppercase tracking-widest"
+                style={{ color: "#8f8f8f" }}
+              >
+                Research Themes
+              </span>
+            </div>
+            <h2
+              className="text-3xl md:text-4xl"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 300,
+                color: "#0d0d0d",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Cross-cutting themes in our work
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "XR for medical training",
+                description:
+                  "We study how people acquire complex, physical, and procedural skills through embodied practice, feedback, and reflection.",
+              },
+              {
+                title: "Human-Centered AI",
+                description:
+                  "We design AI systems that augment instruction, support adaptation, and keep humans in the loop as active learners and decision-makers.",
+              },
+              {
+                title: "Design for Inclusion",
+                description:
+                  "We create equitable, accessible, and supportive learning experiences that work across diverse contexts, learners, and needs.",
+              },
+            ].map((theme) => (
+              <div
+                key={theme.title}
+                className="p-8 border transition-colors duration-200"
+                style={{
+                  background: "#f7f7f5",
+                  borderColor: "#e2e2de",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.background = "#ffffff";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.background = "#f7f7f5";
+                }}
+              >
+                <div
+                  className="text-xs font-semibold uppercase tracking-[0.2em] mb-4"
+                  style={{ color: "#012169" }}
+                >
+                  Theme
+                </div>
+                <h3
+                  className="text-2xl mb-4"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 400,
+                    color: "#0d0d0d",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {theme.title}
+                </h3>
+                <p className="text-base leading-relaxed" style={{ color: "#5a5a5a" }}>
+                  {theme.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Featured Projects */}
       <section className="py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
