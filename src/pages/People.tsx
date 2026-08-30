@@ -103,11 +103,17 @@ export default function People() {
       {/* PhD Students */}
       <section className="mb-20">
         <SectionLabel>PhD Students</SectionLabel>
-        <StudentProfileCard person={people.phd[0]} />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {people.phd.slice(1).map((person) => (
-            <MemberCard key={person.name} person={person} showYear />
+        {people.phd
+          .filter((person) => "bio" in person)
+          .map((person) => (
+            <StudentProfileCard key={person.name} person={person as typeof people.phd[0]} />
           ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {people.phd
+            .filter((person) => !("bio" in person))
+            .map((person) => (
+              <MemberCard key={person.name} person={person} showYear />
+            ))}
         </div>
       </section>
 

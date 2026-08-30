@@ -1,5 +1,7 @@
 import { publications } from "../data/content";
 
+const LAB_MEMBER_NAMES = ["Dishita Turakhia", "Zezheng (Oliver) Sun", "Zezheng Sun", "Xichen He"];
+
 export default function Publications() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
@@ -43,9 +45,9 @@ export default function Publications() {
         style={{ background: "#e2e2de" }}
       >
         {[
-          { value: "x+", label: "Publications" },
-          { value: "×", label: "Best Paper Awards" },
-          { value: "CHI · CSCW · ISMAR", label: "Top Venues" },
+          { value: "5+", label: "Publications" },
+          { value: "—", label: "Best Paper Awards" },
+          { value: "CHI · IEEE VR · ISMAR", label: "Top Venues" },
         ].map((stat) => (
           <div
             key={stat.label}
@@ -182,7 +184,7 @@ function PaperRow({
               <span key={author}>
                 <AuthorName
                   name={author}
-                  isPI={author === "Sarah Chen"}
+                  isPI={LAB_MEMBER_NAMES.some((member) => author.includes(member))}
                 />
                 {i < paper.authors.length - 1 && (
                   <span style={{ color: "#c0c0c0" }}>, </span>

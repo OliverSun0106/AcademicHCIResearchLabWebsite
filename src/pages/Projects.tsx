@@ -2,7 +2,11 @@ import { useState } from "react";
 import { projects, researchAreas } from "../data/content";
 
 const IMG = (id: string, w: number, h: number) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format`;
+  id.startsWith("http")
+    ? id
+    : id.startsWith("local:")
+      ? `${import.meta.env.BASE_URL}${id.slice(6)}`
+      : `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format`;
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
@@ -49,7 +53,11 @@ export default function Projects() {
         {researchAreas.map((area) => (
           <FilterButton
             key={area.id}
-            label={area.title.split(" & ")[0].split(" ")[0] + (area.title.includes("&") ? " & " + area.title.split(" & ")[1].split(" ")[0] : "")}
+            label={
+              area.title.includes("&")
+                ? area.title.split(" & ")[0].split(" ")[0] + " & " + area.title.split(" & ")[1].split(" ")[0]
+                : area.title.split(" ").slice(0, 2).join(" ")
+            }
             active={activeFilter === area.id}
             onClick={() => setActiveFilter(area.id)}
           />
@@ -183,12 +191,24 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
           <div className="text-xs mb-2" style={{ color: "#8f8f8f" }}>
             {project.researchers.join(" · ")}
           </div>
-          <button
-            className="text-xs font-medium transition-opacity hover:opacity-60"
-            style={{ color: "#012169", background: "none", border: "none", cursor: "pointer", padding: 0 }}
-          >
-            View project →
-          </button>
+          {project.link ? (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              className="text-xs font-medium transition-opacity hover:opacity-60"
+              style={{ color: "#012169", textDecoration: "none" }}
+            >
+              View paper →
+            </a>
+          ) : (
+            <button
+              className="text-xs font-medium transition-opacity hover:opacity-60"
+              style={{ color: "#012169", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+            >
+              View project →
+            </button>
+          )}
         </div>
       </div>
     </div>

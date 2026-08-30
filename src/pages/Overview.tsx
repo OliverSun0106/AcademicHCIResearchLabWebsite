@@ -11,22 +11,28 @@ const IMG = (id: string, w: number, h: number) =>
 export default function Overview() {
   const featuredThemes = [
     {
+      title: "XR Skill Learning",
+      description:
+        "We design immersive and extended reality systems that support learning and guidance for complex physical and hands-on skills—including motor, maker, manufacturing, and medical skills.",
+      projectIds: ["vr-task-guidance", "bimanual-xr-assembly"],
+    },
+    {
+      title: "Physiological Sensing",
+      description:
+        "We sense and interpret physiological and behavioral signals—gaze, pupillometry, and neural activity—to build closed-loop interactive systems that respond to users' cognitive states in real time.",
+      projectIds: ["sweyepinch"],
+    },
+    {
       title: "Human-Centered Technologies for Healthcare",
       description:
         "We design and study human-centered technologies, including extended reality (XR) and artificial intelligence (AI), to support medical training, clinical communication, collaboration, and healthcare education.",
-      projectIds: ["placeholder-1"],
+      projectIds: ["placeholder-healthcare"],
     },
     {
       title: "Human-Centered AI",
       description:
         "We design AI systems that augment instruction, support adaptation, and keep humans in the loop as active learners and decision-makers.",
-      projectIds: ["placeholder-2"],
-    },
-    {
-      title: "Design for Inclusion",
-      description:
-        "We create equitable, accessible, and supportive learning experiences that work across diverse contexts, learners, and needs.",
-      projectIds: ["placeholder-3"],
+      projectIds: ["placeholder-human-ai"],
     },
   ];
 
@@ -260,6 +266,8 @@ export default function Overview() {
                 (project) => project.featured && theme.projectIds.includes(project.id),
               );
 
+              if (themeProjects.length === 0) return null;
+
               return (
                 <div key={theme.title}>
                   <div className="max-w-4xl mb-8">
@@ -402,7 +410,11 @@ export default function Overview() {
 
 function ProjectCard({ project, large }: { project: typeof projects[0]; large?: boolean }) {
   const IMG = (id: string, w: number, h: number) =>
-    `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format`;
+    id.startsWith("http")
+      ? id
+      : id.startsWith("local:")
+        ? `${import.meta.env.BASE_URL}${id.slice(6)}`
+        : `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format`;
 
   return (
     <div
