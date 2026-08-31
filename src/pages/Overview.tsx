@@ -22,18 +22,6 @@ export default function Overview() {
         "We sense and interpret physiological and behavioral signals—gaze, pupillometry, and neural activity—to build closed-loop interactive systems that respond to users' cognitive states in real time.",
       projectIds: ["sweyepinch"],
     },
-    {
-      title: "Human-Centered Technologies for Healthcare",
-      description:
-        "We design and study human-centered technologies, including extended reality (XR) and artificial intelligence (AI), to support medical training, clinical communication, collaboration, and healthcare education.",
-      projectIds: ["placeholder-healthcare"],
-    },
-    {
-      title: "Human-Centered AI",
-      description:
-        "We design AI systems that augment instruction, support adaptation, and keep humans in the loop as active learners and decision-makers.",
-      projectIds: ["placeholder-human-ai"],
-    },
   ];
 
   return (
@@ -361,7 +349,7 @@ export default function Overview() {
             </div>
 
             {/* PhD students */}
-            {people.phd.map((person) => (
+            {[...people.phd].reverse().map((person) => (
               <div
                 key={person.name}
                 className="flex items-center gap-4 p-5 border transition-colors duration-150"

@@ -41,12 +41,11 @@ function Nav() {
           className="flex items-center gap-3 group"
           style={{ textDecoration: "none" }}
         >
-          <div
-            className="w-8 h-8 flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
-            style={{ background: "#012169", borderRadius: "2px", fontFamily: "var(--font-display)" }}
-          >
-            HCI
-          </div>
+          <img
+            src="https://www.emory.edu/themes/emory/favicon.svg"
+            alt="Emory University"
+            className="w-8 h-8 object-contain flex-shrink-0"
+          />
           <div>
             <div
               className="text-sm font-medium leading-none"
@@ -114,14 +113,22 @@ function Footer() {
   return (
     <footer className="border-t mt-24" style={{ borderColor: "#e2e2de" }}>
       <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
-            <div
+            <a
+              href="https://computerscience.emory.edu/index.html"
+              target="_blank"
+              rel="noreferrer"
               className="text-base font-medium mb-2"
-              style={{ fontFamily: "var(--font-display)", color: "#012169" }}
+              style={{
+                display: "inline-block",
+                fontFamily: "var(--font-display)",
+                color: "#012169",
+                textDecoration: "none",
+              }}
             >
-              HCI @ Emory
-            </div>
+              Computer Science@emory
+            </a>
             <p className="text-sm leading-relaxed" style={{ color: "#5a5a5a" }}>
               Department of Computer Science<br />
               Mathematics &amp; Science Center, Suite W401<br />
@@ -130,7 +137,7 @@ function Footer() {
               Atlanta, GA 30322
             </p>
           </div>
-          <div>
+          <div className="md:justify-self-end md:min-w-[180px]">
             <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#8f8f8f" }}>
               Contact
             </div>
@@ -139,23 +146,6 @@ function Footer() {
               404-727-7962<br />
               404-727-5611
             </p>
-          </div>
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#8f8f8f" }}>
-              Links
-            </div>
-            <div className="flex flex-col gap-1.5">
-              {["Emory University", "Department of CS", "ACM DL Profile", "Google Scholar"].map((l) => (
-                <a
-                  key={l}
-                  href="#"
-                  className="text-sm transition-colors duration-150 hover:opacity-70"
-                  style={{ color: "#012169", textDecoration: "none" }}
-                >
-                  {l}
-                </a>
-              ))}
-            </div>
           </div>
         </div>
         <div className="mt-10 pt-6 border-t flex items-center justify-between" style={{ borderColor: "#e2e2de" }}>

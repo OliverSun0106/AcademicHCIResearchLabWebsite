@@ -70,14 +70,6 @@ export default function People() {
             <p className="text-base leading-relaxed mb-8" style={{ color: "#5a5a5a" }}>
               {people.pi.bio}
             </p>
-            <div className="space-y-2 mb-6">
-              {people.pi.awards.map((award) => (
-                <div key={award} className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 flex-shrink-0" style={{ background: "#F2A900", borderRadius: "50%" }} />
-                  <span className="text-sm" style={{ color: "#5a5a5a" }}>{award}</span>
-                </div>
-              ))}
-            </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
               <a
                 href={`mailto:${people.pi.email}`}
@@ -103,76 +95,12 @@ export default function People() {
       {/* PhD Students */}
       <section className="mb-20">
         <SectionLabel>PhD Students</SectionLabel>
-        {people.phd
+        {[...people.phd]
+          .reverse()
           .filter((person) => "bio" in person)
           .map((person) => (
             <StudentProfileCard key={person.name} person={person as typeof people.phd[0]} />
           ))}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {people.phd
-            .filter((person) => !("bio" in person))
-            .map((person) => (
-              <MemberCard key={person.name} person={person} showYear />
-            ))}
-        </div>
-      </section>
-
-      {/* Master's Students */}
-      <section className="mb-20">
-        <SectionLabel>Master's Students</SectionLabel>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {people.masters.map((person) => (
-            <MemberCard key={person.name} person={person} showYear />
-          ))}
-        </div>
-      </section>
-
-      {/* Undergraduate Researchers */}
-      <section className="mb-20">
-        <SectionLabel>Undergraduate Researchers</SectionLabel>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {people.undergrad.map((person) => (
-            <MemberCard key={person.name} person={person} />
-          ))}
-        </div>
-      </section>
-
-      {/* Alumni */}
-      <section>
-        <SectionLabel>Alumni</SectionLabel>
-        <div className="border-t" style={{ borderColor: "#e2e2de" }}>
-          {people.alumni.map((person, i) => (
-            <div
-              key={person.name}
-              className="flex items-center gap-6 py-5 border-b"
-              style={{ borderColor: "#e2e2de" }}
-            >
-              <img
-                src={IMG(person.photo, 80, 80)}
-                alt={person.name}
-                className="w-12 h-12 object-cover flex-shrink-0"
-                style={{ borderRadius: "2px", background: "#e8edf5" }}
-              />
-              <div className="flex-1 min-w-0">
-                <div
-                  className="text-base font-medium"
-                  style={{ fontFamily: "var(--font-display)", color: "#0d0d0d" }}
-                >
-                  {person.name}
-                </div>
-                <div className="text-sm" style={{ color: "#8f8f8f" }}>
-                  {person.position}
-                </div>
-              </div>
-              <div
-                className="text-sm text-right"
-                style={{ color: "#5a5a5a" }}
-              >
-                {person.now}
-              </div>
-            </div>
-          ))}
-        </div>
       </section>
     </div>
   );
@@ -192,56 +120,18 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function MemberCard({
-  person,
-  showYear,
-}: {
-  person: { name: string; position: string; interests: string; photo: string; year?: string };
-  showYear?: boolean;
-}) {
-  return (
-    <div
-      className="group border overflow-hidden transition-all duration-200"
-      style={{ borderColor: "#e2e2de" }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLDivElement).style.borderColor = "#012169";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLDivElement).style.borderColor = "#e2e2de";
-      }}
-    >
-      <div className="aspect-square overflow-hidden" style={{ background: "#e8edf5" }}>
-        <img
-          src={IMG(person.photo, 400, 400)}
-          alt={person.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-      <div className="p-5">
-        <div
-          className="text-base font-medium mb-0.5"
-          style={{ fontFamily: "var(--font-display)", color: "#0d0d0d" }}
-        >
-          {person.name}
-        </div>
-        {showYear && (person as any).year && (
-          <div className="text-xs mb-2" style={{ color: "#012169" }}>
-            {(person as any).year}
-          </div>
-        )}
-        <div className="text-xs leading-relaxed" style={{ color: "#8f8f8f" }}>
-          {person.interests}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function StudentProfileCard({ person }: { person: typeof people.phd[0] }) {
   const links = [
-    { label: "Email ↗", href: person.email ? `mailto:${person.email}` : "" },
-    { label: "Personal Website ↗", href: person.website },
-    { label: "CV ↗", href: person.cv },
+    {
+      label: person.email,
+      href: person.email ? `mailto:${person.email}` : "",
+      isEmail: true,
+    },
+    {
+      label: "Personal Website ↗",
+      href: person.website,
+      isEmail: false,
+    },
   ];
 
   return (
@@ -272,22 +162,14 @@ function StudentProfileCard({ person }: { person: typeof people.phd[0] }) {
         <p className="text-base leading-relaxed mb-7" style={{ color: "#5a5a5a" }}>
           {person.bio}
         </p>
-        <div className="space-y-2 mb-7">
-          {person.focusAreas.map((area) => (
-            <div key={area} className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 flex-shrink-0 rounded-full" style={{ background: "#F2A900" }} />
-              <span className="text-sm" style={{ color: "#5a5a5a" }}>{area}</span>
-            </div>
-          ))}
-        </div>
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           {links.map((link) =>
             link.href ? (
               <a
                 key={link.label}
                 href={link.href}
-                target={link.label === "Email ↗" ? undefined : "_blank"}
-                rel={link.label === "Email ↗" ? undefined : "noreferrer"}
+                target={link.isEmail ? undefined : "_blank"}
+                rel={link.isEmail ? undefined : "noreferrer"}
                 className="text-sm font-medium transition-opacity hover:opacity-60"
                 style={{ color: "#012169", textDecoration: "none" }}
               >
