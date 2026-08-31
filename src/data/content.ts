@@ -176,7 +176,7 @@ export const people = {
       ],
       photo: "local:xichen-he.jpg",
       email: "xichen.he@emory.edu",
-      website: "https://xichenhe.github.io/PersonalWebsite/",
+      website: "https://xichenhe.com/",
       cv: "",
     },
     {
