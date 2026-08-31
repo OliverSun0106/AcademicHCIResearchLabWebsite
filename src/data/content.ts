@@ -11,7 +11,7 @@ export const researchAreas = [
     id: 2,
     title: "Physiological Sensing",
     icon: "◎",
-    keywords: ["Brain–Computer Interfaces", "Gaze & Pupillometry", "Cognitive Load", "Multimodal Sensing"],
+    keywords: ["Brain-Computer Interfaces", "Gaze & Pupillometry", "Cognitive Load", "Multimodal Sensing"],
     description:
       "We investigate physiological and behavioral signals to understand learners' cognitive and affective states and drive closed-loop, BCI-enabled adaptive XR systems.",
   },
@@ -176,7 +176,7 @@ export const people = {
       ],
       photo: "local:xichen-he.jpg",
       email: "xichen.he@emory.edu",
-      website: "",
+      website: "https://xichenhe.github.io/PersonalWebsite/",
       cv: "",
     },
     {
